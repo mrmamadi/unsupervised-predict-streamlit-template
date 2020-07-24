@@ -8,7 +8,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 os.path.exists('../movies.csv')
 
 # Importing data
-movies = pd.read_csv('../movies.csv') # Remove this to be modular
+movies = pd.read_csv('../movies.csv')
 
 # Initialising Vectoriser
 vectoriser = CountVectorizer()

@@ -30,9 +30,10 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 
 # Importing data
-movies_df = pd.read_csv('resources/data/movies.csv',sep = ',',delimiter=',')
+movies = pd.read_csv('../movies.csv')
 ratings_df = pd.read_csv('resources/data/ratings.csv')
 ratings_df.drop(['timestamp'], axis=1,inplace=True)
+
 # Building the Model
 model=pickle.load(open('resources/models/SVD.pkl', 'rb'))
 
