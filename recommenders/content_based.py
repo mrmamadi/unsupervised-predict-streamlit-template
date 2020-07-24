@@ -5,18 +5,15 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 
-# os.path.exists('../resources/data/movies.csv')
+os.path.exists('../movies.csv')
 
 # Importing data
 movies = pd.read_csv('../movies.csv') # Remove this to be modular
-# ratings = pd.read_csv('resources/data/ratings.csv') # Remove this to be modular
 
 # Initialising Vectoriser
 vectoriser = CountVectorizer()
 # Fitting Vectoriser and transforming content column
 content_matrix = vectoriser.fit_transform(movies['content'])
-
-# movieIds = movies['movieId']
 
 # Creating Series of movieIds and indices for easier recall
 indices = pd.Series(movies.index, index=movies['movieId'])
@@ -46,7 +43,8 @@ def content_model(list_title,k=20):
     # Initiate list to store indeces of input movies
     m_idx = []
     for title in list_title:
-        m_idx.append(indices[movies.movieId[movies['title']==title][:1]].values)
+        for id in movies.movieId[movies['title']==title]:
+            m_idx.append(indices[id])
     # Create list of similarities between each input movie and every other movie in the dataset                   
     sim = list(enumerate(cosine_similarity(content_matrix,
                                        input_matrix)))   
