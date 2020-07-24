@@ -23,13 +23,30 @@ indices = pd.Series(movies.index, index=movies['movieId'])
 
 def content_model(list_title,k=20):
 
+    """
+    Predict a number of recommended movies based off the content of a film
+
+    Parameters:
+    -----------
+    list_title : list
+        List of movies from which to draw comparisons
+
+    k : int
+        Number of recommended movies to return
+
+    Returns:
+    ----------
+    pandas.core.series.Series
+        Series of k indexed movie films ranked by similarity to input list. 
+
+    """
     # Vectorise content for each movie in list_title
     input_matrix = vectoriser.transform(movies.content[movies['title'].isin(list_title)])
 
     # Initiate list to store indeces of input movies
     m_idx = []
     for title in list_title:
-        m_idx.append(indices[movies.movieId[movies['title']==title]].values)
+        m_idx.append(indices[movies.movieId[movies['title']==title][:1]].values)
     # Create list of similarities between each input movie and every other movie in the dataset                   
     sim = list(enumerate(cosine_similarity(content_matrix,
                                        input_matrix)))   
