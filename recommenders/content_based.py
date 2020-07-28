@@ -1,5 +1,6 @@
 # Importing packages and Data
 import os
+import streamlit as st
 import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
@@ -18,6 +19,7 @@ content_matrix = vectoriser.fit_transform(movies['content'])
 # Creating Series of movieIds and indices for easier recall
 indices = pd.Series(movies.index, index=movies['movieId'])
 
+# @st.cache
 def content_model(list_title,k=20):
 
     """
