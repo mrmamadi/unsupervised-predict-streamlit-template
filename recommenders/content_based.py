@@ -2,14 +2,42 @@
 
     Content-based filtering for item recommendation.
 
+<<<<<<< HEAD
     Author: JHB_EN1_UNSUPERVISED.
 
     Description: Provided within this file is a content
+=======
+    Author: Explore Data Science Academy.
+
+    Note:
+    ---------------------------------------------------------------------
+    Please follow the instructions provided within the README.md file
+    located within the root of this repository for guidance on how to use
+    this script correctly.
+
+    NB: You are required to extend this baseline algorithm to enable more
+    efficient and accurate computation of recommendations.
+
+    !! You must not change the name and signature (arguments) of the
+    prediction function, `content_model` !!
+
+    You must however change its contents (i.e. add your own content-based
+    filtering algorithm), as well as altering/adding any other functions
+    as part of your improvement.
+
+    ---------------------------------------------------------------------
+
+    Description: Provided within this file is a baseline content-based
+>>>>>>> master
     filtering algorithm for rating predictions on Movie data.
 
 """
 
+<<<<<<< HEAD
 # Importing packages and Data
+=======
+# Script dependencies
+>>>>>>> master
 import os
 import streamlit as st
 import pandas as pd

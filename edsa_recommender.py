@@ -97,6 +97,8 @@ def main():
                 except:
                     st.error("Oops! Looks like this algorithm does't work.\
                               We'll need to fix it!")
+
+
     # -------------------------------------------------------------------
 
     # ------------- SAFE FOR ALTERING/EXTENSION -------------------
