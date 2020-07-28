@@ -63,29 +63,38 @@ def main():
 
         # User-based preferences
         st.write('### Enter Your Three Favorite Movies')
-        movie_1 = st.selectbox('Fisrt Option',title_list[1493:1520])
-        movie_2 = st.selectbox('Second Option',title_list[2110:2120])
-        movie_3 = st.selectbox('Third Option',title_list[2110:2120])
-        # movie_1 = st.selectbox('Fisrt Option',title_list[14930:15200])
-        # movie_2 = st.selectbox('Second Option',title_list[25055:25255])
-        # movie_3 = st.selectbox('Third Option',title_list[21100:21200])
+        movie_1 = st.selectbox('Fisrt Option',title_list[14930:15200])
+        movie_2 = st.selectbox('Second Option',title_list[25055:25255])
+        movie_3 = st.selectbox('Third Option',title_list[21100:21200])
         fav_movies = [movie_1,movie_2,movie_3]
 
         # Perform top-10 movie recommendation generation
         if sys == 'Content Based Filtering':
-            top_recommendations = content_model(fav_movies)
             if st.button("Recommend"):
-                   st.title("We think you'll like:")
-                   for i,j in enumerate(top_recommendations[:10]):
-                       st.subheader(str(i+1)+'. '+j)
+                try:
+                    with st.spinner('Crunching the numbers...'):
+                        top_recommendations = content_model(movie_list=fav_movies,
+                                                            top_n=10)
+                    st.title("We think you'll like:")
+                    for i,j in enumerate(top_recommendations):
+                        st.subheader(str(i+1)+'. '+j)
+                except:
+                    st.error("Oops! Looks like this algorithm does't work.\
+                              We'll need to fix it!")
+
 
         if sys == 'Collaborative Based Filtering':
-            top_recommendations = collab_model(movie_list=fav_movies,
-                                               top_n=10)
             if st.button("Recommend"):
-                st.title("We think you'll like:")
-                for i,j in enumerate(top_recommendations):
-                    st.subheader(str(i+1)+'. '+j)
+                try:
+                    with st.spinner('Crunching the numbers...'):
+                        top_recommendations = collab_model(movie_list=fav_movies,
+                                                           top_n=10)
+                    st.title("We think you'll like:")
+                    for i,j in enumerate(top_recommendations):
+                        st.subheader(str(i+1)+'. '+j)
+                except:
+                    st.error("Oops! Looks like this algorithm does't work.\
+                              We'll need to fix it!")
     # -------------------------------------------------------------------
 
     # ------------- SAFE FOR ALTERING/EXTENSION -------------------

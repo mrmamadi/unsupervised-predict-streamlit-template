@@ -20,7 +20,7 @@ content_matrix = vectoriser.fit_transform(movies['content'])
 indices = pd.Series(movies.index, index=movies['movieId'])
 
 # @st.cache
-def content_model(list_title,k=20):
+def content_model(movie_list,top_n):
 
     """
     Predict a number of recommended movies based off the content of a film
@@ -40,11 +40,11 @@ def content_model(list_title,k=20):
 
     """
     # Vectorise content for each movie in list_title
-    input_matrix = vectoriser.transform(movies.content[movies['title'].isin(list_title)])
+    input_matrix = vectoriser.transform(movies.content[movies['title'].isin(movie_list)])
 
     # Initiate list to store indeces of input movies
     m_idx = []
-    for title in list_title:
+    for title in movie_list:
         for id in movies.movieId[movies['title']==title]:
             m_idx.append(indices[id])
     # Create list of similarities between each input movie and every other movie in the dataset                   
@@ -55,10 +55,10 @@ def content_model(list_title,k=20):
     sim_scores = sorted(sim, key=lambda x: x[1].mean(), reverse=True)
                        
     # Select the top-k values for recommendation
-    sim_scores = sim_scores[0:k]
+    sim_scores = sim_scores[0:20]
 
     # Select the indices of the top-k movies
     movie_indices = [i[0] for i in sim_scores if i[0] not in m_idx]
     
     # Return a list of the movie titles
-    return movies.iloc[movie_indices].title   
+    return movies.iloc[movie_indices].title[:top_n] 
