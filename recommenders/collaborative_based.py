@@ -4,29 +4,7 @@
 
     Author: JHB_EN1_UNSUPERVISED.
 
-<<<<<<< HEAD
     Description: Provided within this file is a collaborative
-=======
-    Note:
-    ---------------------------------------------------------------------
-    Please follow the instructions provided within the README.md file
-    located within the root of this repository for guidance on how to use
-    this script correctly.
-
-    NB: You are required to extend this baseline algorithm to enable more
-    efficient and accurate computation of recommendations.
-
-    !! You must not change the name and signature (arguments) of the
-    prediction function, `collab_model` !!
-
-    You must however change its contents (i.e. add your own collaborative
-    filtering algorithm), as well as altering/adding any other functions
-    as part of your improvement.
-
-    ---------------------------------------------------------------------
-
-    Description: Provided within this file is a baseline collaborative
->>>>>>> master
     filtering algorithm for rating predictions on Movie data.
 
 """
