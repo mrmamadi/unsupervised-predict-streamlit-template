@@ -39,13 +39,15 @@ from recommenders.content_based import content_model
 
 # Data Loading
 title_list = load_movie_titles('resources/data/movies.csv')
+new_imdb = pd.read_csv('../new_imdb.csv')
+imdb = pd.read_csv('../unsupervised_data/unsupervised_movie_data/imdb_data.csv')
 
 # App declaration
 def main():
 
     # DO NOT REMOVE the 'Recommender System' option below, however,
     # you are welcome to add more options to enrich your app.
-    page_options = ["Recommender System","Solution Overview", "EDA", "Contributors"]
+    page_options = ["Recommender System", "Contributors"]
 
     # -------------------------------------------------------------------
     # ----------- !! THIS CODE MUST NOT BE ALTERED !! -------------------
@@ -101,38 +103,32 @@ def main():
     if page_selection == "Solution Overview":
         titles_list = sorted(title_list)
         st.title("Solution Overview")
-        st.write("Describe your winning approach on this page")
-        st.image('resources/imgs/Image_header.png',use_column_width=True)
-        # Recommender System algorithm selection
-        sys = st.radio("Select an algorithm",
-                       ('Content Based Filtering',
-                        'Collaborative Based Filtering'))
+        st.markdown(
+            """
+            
+            """)
+        options = ['Scraping IMDb Movie Data','Exploratory Data Analysis','Building Content Column']
+        option = st.selectbox('Select Preprocessing To View',options)
 
-        # User-based preferences
-        st.write('### Enter Your Three Favorite Movies')
-        movie_1 = st.selectbox('Fisrt Option',(titles_list[1100:1200]))
-        movie_2 = st.selectbox('Second Option',(titles_list[2366:2466]))
-        movie_3 = st.selectbox('Third Option',(titles_list[3666:3766]))
-        # movie_1 = st.selectbox('Fisrt Option',title_list[14930:15200])
-        # movie_2 = st.selectbox('Second Option',title_list[25055:25255])
-        # movie_3 = st.selectbox('Third Option',title_list[21100:21200])
-        fav_movies = [movie_1,movie_2,movie_3]
+        if option == 'Scraping IMDb Movie Data':
+            st.subheader('Scrape')
+            st.markdown(
+                """
+                #### Description
+                - Whoops.
 
-        # Perform top-10 movie recommendation generation
-        if sys == 'Content Based Filtering':
-            top_recommendations = content_model(fav_movies)
-            if st.button("Recommend"):
-                   st.title("We think you'll like:")
-                   for i,j in enumerate(top_recommendations[:10]):
-                       st.subheader(str(i+1)+'. '+j)
+                """
+            )
 
-        if sys == 'Collaborative Based Filtering':
-            top_recommendations = collab_model(movie_list=fav_movies,
-                                               top_n=10)
-            if st.button("Recommend"):
-                st.title("We think you'll like:")
-                for i,j in enumerate(top_recommendations):
-                    st.subheader(str(i+1)+'. '+j)
+
+        if option == 'Exploratory Data Analysis':
+            st.write('EDA')
+
+
+        if option == 'Building Content Column':
+            st.write('Content')
+
+
     # You may want to add more sections here for aspects such as an EDA,
     # or to provide your business pitch.
 
@@ -140,19 +136,23 @@ def main():
 
 
     # ------------------------------- NEW PAGE -------------------------------
-    if page_selection == "EDA":
 
-        st.title("Exploratory Data Analysis")
-
-
-
-    # ------------------------------------------------------------------------
-
-
-    # ------------------------------- NEW PAGE -------------------------------
     if page_selection == "Contributors":
 
         st.title("Team EN1 JHB Unsupervised")
+        st.markdown(
+            """
+
+            \n
+            - [Sibusiso Luthuli](https://github.com/SibusisoTL)
+            - [Nondumiso Magudulela](https://github.com/Ndumi-ndumi)
+            - [Kgaogelo Mamadi](https://github.com/mrmamadi)
+            - [Hlamulo Mavasa](https://github.com/Hlamulo-Mav)
+            - [Gavin Pillay](https://github.com/GHP012)
+            - [Callin Reeby](https://github.com/CallinR)
+
+            """
+        )
     
 if __name__ == '__main__':
     main()

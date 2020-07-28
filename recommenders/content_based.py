@@ -1,3 +1,14 @@
+"""
+
+    Content-based filtering for item recommendation.
+
+    Author: JHB_EN1_UNSUPERVISED.
+
+    Description: Provided within this file is a content
+    filtering algorithm for rating predictions on Movie data.
+
+"""
+
 # Importing packages and Data
 import os
 import streamlit as st
@@ -40,13 +51,15 @@ def content_model(movie_list,top_n):
 
     """
     # Vectorise content for each movie in list_title
-    input_matrix = vectoriser.transform(movies.content[movies['title'].isin(movie_list)])
-
+    input_matrix = vectoriser.transform(movies[movies['title'].isin(movie_list)].content)
+    
     # Initiate list to store indeces of input movies
     m_idx = []
+    
     for title in movie_list:
         for id in movies.movieId[movies['title']==title]:
             m_idx.append(indices[id])
+            
     # Create list of similarities between each input movie and every other movie in the dataset                   
     sim = list(enumerate(cosine_similarity(content_matrix,
                                        input_matrix)))   
